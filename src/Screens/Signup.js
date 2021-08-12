@@ -9,11 +9,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { TextInput, RadioButton, ToggleButton } from 'react-native-paper';
 import {
-    View, Text, SafeAreaView, ScrollView, Alert, TouchableOpacity
+    View, Text, SafeAreaView, ScrollView, Alert, TouchableOpacity, StatusBar
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import SelectDropdown from 'react-native-select-dropdown';
-import { SignUpStyle, MainBlue } from '../assets/styles/styles';
+import { ContainerStyle, SignUpStyle, MainBlue } from '../assets/styles/styles';
+import ButtonBox from '../components/layout/ButtonBox';
 
 const countries = ["Egypt", "Canada", "Australia", "Ireland", "Egypt", "Canada", "Australia", "Ireland"]
 const Signup = ({navigation}) => {
@@ -130,16 +131,17 @@ const Signup = ({navigation}) => {
     }
 
     const onsubmit = () => {
-        navigation.replace('Landing');
+        navigation.navigate('Landing');
     }
 
     useEffect(() => {
     }, []);
 
     return (
-        <SafeAreaView style={SignUpStyle.container}>
-            <ScrollView style={SignUpStyle.scrollView}>
-                <View style={SignUpStyle.content}>
+        <SafeAreaView style={ContainerStyle.container}>
+            <ScrollView style={ContainerStyle.scrollView}>
+                <View style={ContainerStyle.content}>
+                    <StatusBar/>
                     <Text style={SignUpStyle.title}>Create a Profile</Text>
                     <TextInput
                         style={SignUpStyle.inputBox}
@@ -247,13 +249,7 @@ const Signup = ({navigation}) => {
 
                     {influencerContent}
 
-                    <TouchableOpacity
-                        style={SignUpStyle.submitBtn}
-                        onPress={() => onsubmit()}
-                        activeOpacity={0.6}
-                    >
-                        <Text style={SignUpStyle.submitText}>CREATE PROFILE</Text>
-                    </TouchableOpacity>
+                    <ButtonBox name={'CREATE PROFILE'} submit={() => onsubmit()} />
                 </View>
             </ScrollView>
         </SafeAreaView>
